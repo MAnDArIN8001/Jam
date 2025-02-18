@@ -11,11 +11,23 @@ namespace Player.Systems.Mono
 
         [Space, SerializeField] private Transform _checkerPoint;
 
-        private void OnCollisionEnter(Collision other)
+        public bool IsOnGround { get; private set; }
+
+        private void OnTriggerEnter(Collider other)
         {
             if (Physics.Raycast(_checkerPoint.position, -transform.up, _checkDistance))
             {
+                IsOnGround = true;
+                
                 OnGrounded?.Invoke();
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (Physics.Raycast(_checkerPoint.position, -transform.up, _checkDistance))
+            {
+                IsOnGround = false;
             }
         }
     }

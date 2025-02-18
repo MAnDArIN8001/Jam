@@ -4,6 +4,8 @@ namespace Player.StateMachine.States
 {
     public abstract class State : IDisposable
     {
+        public BehaviourStates StateType { get; protected set; }
+        
         protected Player _player;
         
         public State(Player player)

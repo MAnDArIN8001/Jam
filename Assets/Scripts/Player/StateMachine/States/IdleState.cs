@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.InputSystem;
-
-namespace Player.StateMachine.States
+﻿namespace Player.StateMachine.States
 {
     public class IdleState : State
     {
@@ -13,6 +10,8 @@ namespace Player.StateMachine.States
         {
             _baseInput = player.BaseInput;
             _stateMachine = player.StateMachine;
+
+            StateType = BehaviourStates.Idle;
         }
         
         public override void Enter() { }

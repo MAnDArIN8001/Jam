@@ -16,7 +16,7 @@ namespace Player.Systems.Movement
         
         public override void Move(Vector3 direction, float speed)
         {
-            var newVelocity = new Vector3(direction.x * speed, _rigidbody.linearVelocity.y, direction.z);
+            var newVelocity = new Vector3(direction.x * speed, _rigidbody.linearVelocity.y, direction.z * speed);
 
             _rigidbody.linearVelocity = newVelocity;
         }

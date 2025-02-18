@@ -8,6 +8,7 @@ namespace Player.StateMachine.States
         
         public FallState(Player player) : base(player)
         {
+            StateType = BehaviourStates.Fall;
         }
 
         public override void Enter()

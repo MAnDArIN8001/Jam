@@ -17,6 +17,9 @@ namespace Player.StateMachine.States
         {
             _movementSystem = player.MovementSystem;
             _baseInput = player.BaseInput;
+            _movementSpeed = player.PlayerSetup.MovementSpeed;
+
+            StateType = BehaviourStates.Walk;
         }
 
         public override void Enter() { }
@@ -30,7 +33,9 @@ namespace Player.StateMachine.States
                 //update view data
             }
 
-            _movementSystem.Move(_player.transform.forward, _movementSpeed);
+            var movementDirection = _player.transform.forward * input.y + _player.transform.right * input.x;
+
+            _movementSystem.Move(movementDirection, _movementSpeed);
         }
 
         public override void Exit() { }

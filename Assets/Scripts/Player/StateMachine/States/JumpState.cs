@@ -13,6 +13,8 @@ namespace Player.StateMachine.States
         {
             _jumpSystem = player.JumpSystem;
             _playerView = player.PlayerView;
+
+            StateType = BehaviourStates.Jump;
         }
 
         public override void Enter()
