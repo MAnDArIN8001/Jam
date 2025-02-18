@@ -1,6 +1,8 @@
-﻿namespace Player.StateMachine.States
+﻿using System;
+
+namespace Player.StateMachine.States
 {
-    public abstract class State
+    public abstract class State : IDisposable
     {
         protected Player _player;
         
@@ -12,5 +14,7 @@
         public abstract void Enter();
         public abstract void Update();
         public abstract void Exit();
+
+        public virtual void Dispose() { }
     }
 }
