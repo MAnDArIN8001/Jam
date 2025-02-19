@@ -57,7 +57,7 @@ namespace Player.StateMachine.Initializer
                 //WallRun
 
                 new Transition(BehaviourStates.WallRun, BehaviourStates.Idle,
-                    () => _player.GroundingChecker.IsOnGround),
+                    () => !_player.WallChecker.IsOnWall),
                 new Transition(BehaviourStates.WallRun, BehaviourStates.WallJump,
                     () => _player.BaseInput.Controls.Jump.WasPerformedThisFrame()),
 
