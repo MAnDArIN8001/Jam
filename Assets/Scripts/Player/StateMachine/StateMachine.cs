@@ -45,7 +45,6 @@ namespace Player.StateMachine
 
             if (_states.TryGetValue(newState, out _currentState))
             {
-                Debug.Log($"Swap on {newState.ToString()}");
                 _currentState.Enter();
             }
             else
