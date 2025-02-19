@@ -123,5 +123,7 @@ namespace Player.StateMachine
         Run = 2,
         Jump = 3,
         Fall = 4,
+        WallRun = 5,
+        WallJump = 6,
     }
 }

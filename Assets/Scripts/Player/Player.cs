@@ -20,12 +20,15 @@ namespace Player
         public MovementSystem MovementSystem { get; private set; }
 
         [field: SerializeField, Space, Header("View")] public PlayerView PlayerView { get; private set; }
+       
         [field: SerializeField] public PlayerRiggingController PlayerRiggingController { get; private set; }
         
         [field: SerializeField, Space, Header("Configuration")] public PlayerSetup PlayerSetup { get; private set; }
 
         [field: SerializeField, Space, Header("Controls components")] public GroundingChecker GroundingChecker { get; private set; }
-
+        
+        [field: SerializeField] public WallChecker WallChecker { get; private set; }
+        
         private BaseInput _baseInput;
 
         private StateMachine.StateMachine _stateMachine;
@@ -41,6 +44,7 @@ namespace Player
 
             MovementSystem = new BaseMovementSystem(gameObject);
             JumpSystem = new BaseJumpSystem(gameObject, GroundingChecker, PlayerSetup.JumpForce);
+
 
             var playerFSMInitializer = new PlayerStateMachineInitializer(this);
             
