@@ -4,11 +4,11 @@ namespace Player.Systems.Movement
 {
     public class BaseMovementSystem : MovementSystem
     {
-        private Rigidbody _rigidbody;
+        protected Rigidbody rigidbody;
         
         public BaseMovementSystem(GameObject context) : base(context)
         {
-            if (!context.TryGetComponent<Rigidbody>(out _rigidbody))
+            if (!context.TryGetComponent<Rigidbody>(out rigidbody))
             {
                 Debug.LogWarning($"Can't resolve required rigidbody component from {context}");
             }
@@ -16,9 +16,9 @@ namespace Player.Systems.Movement
         
         public override void Move(Vector3 direction, float speed)
         {
-            var newVelocity = new Vector3(direction.x * speed, _rigidbody.linearVelocity.y, direction.z * speed);
+            var newVelocity = new Vector3(direction.x * speed, rigidbody.linearVelocity.y, direction.z * speed);
 
-            _rigidbody.linearVelocity = newVelocity;
+            rigidbody.linearVelocity = newVelocity;
         }
     }
 }

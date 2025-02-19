@@ -5,8 +5,6 @@ namespace Player.Systems.JumpSystem
 {
     public class BaseJumpSystem : JumpSystem
     {
-        private bool _onGround;
-        
         private float _jumpForce;
 
         private IGroundChecker _groundChecker;
@@ -22,35 +20,20 @@ namespace Player.Systems.JumpSystem
             {
                 Debug.LogWarning($"Can't resolve required rigidbody component from {context}");
             }
-
-            groundChecker.OnGrounded += HandleGrounding;
         }
         
         public override void Jump()
         {
-            if (!_onGround)
-            {
-                return;
-            }
+            if (!_groundChecker.IsOnGround) return;
 
-            _onGround = false;
-            
-            var newVelocity = (_context.transform.up * _jumpForce) + _rigidbody.linearVelocity;
+            this.Jump(_context.transform.up);
+        }
+
+        protected override void Jump(Vector3 direction)
+        {
+            var newVelocity = (direction * _jumpForce) + _rigidbody.linearVelocity;
 
             _rigidbody.linearVelocity = newVelocity;
-        }
-
-        public override void Dispose()
-        {
-            if (_groundChecker is not null)
-            {
-                _groundChecker.OnGrounded -= HandleGrounding;
-            }
-        }
-
-        private void HandleGrounding()
-        {
-            _onGround = true;
         }
     }
 }

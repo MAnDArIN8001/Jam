@@ -14,6 +14,8 @@ namespace Player.Systems.JumpSystem
         
         public abstract void Jump();
 
+        protected abstract void Jump(Vector3 direction);
+
         public virtual void Dispose() { }
     }
 }
