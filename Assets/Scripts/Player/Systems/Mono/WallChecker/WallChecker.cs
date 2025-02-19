@@ -22,27 +22,26 @@ namespace Player.Systems.Mono
         private void CheckForWalls()
         {
             // Проверяем наличие стены слева
-            CheckWall(-Player.transform.right);
+            _isOnWall = CheckWall(-Player.transform.right);
 
             // Проверяем наличие стены справа
-            CheckWall(Player.transform.right);
+            _isOnWall |= CheckWall(Player.transform.right);
         }
 
-        private void CheckWall(Vector3 direction)
+        private bool CheckWall(Vector3 direction)
         {
             // Выполняем Raycast
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, checkDistance))
             {
-                _isOnWall = true;
                 _wallNormal = hit.normal;
                 Debug.DrawLine(transform.position, hit.point, Color.red);
-                return;
+                return true;
                 // Вызываем событие, если игрок коснулся стены
             }
             Debug.DrawLine(transform.position, transform.position + direction.normalized * checkDistance, Color.green);
 
 
-            _isOnWall = false;
+            return false;
         }
     }
 }

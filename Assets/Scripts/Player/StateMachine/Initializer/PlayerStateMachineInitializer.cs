@@ -36,7 +36,11 @@ namespace Player.StateMachine.Initializer
                 new Transition(BehaviourStates.Idle, BehaviourStates.Walk, 
                     () => _player.BaseInput.Controls.Movement.ReadValue<Vector2>().magnitude > 0),
                 new Transition(BehaviourStates.Idle, BehaviourStates.Jump, 
-                    () => _player.BaseInput.Controls.Jump.WasPerformedThisFrame()),
+                    () => _player.BaseInput.Controls.Jump.WasPerformedThisFrame() && _player.GroundingChecker.IsOnGround),
+
+                //Нужно удалить после исправления мгновенного переключения с прыжка на IDLE 
+                new Transition(BehaviourStates.Idle, BehaviourStates.WallRun, 
+                    () =>  !_player.GroundingChecker.IsOnGround && _player.WallChecker.IsOnWall),
                 
                 //WALK
                
@@ -45,7 +49,7 @@ namespace Player.StateMachine.Initializer
                 new Transition(BehaviourStates.Walk, BehaviourStates.Run, 
                     () => _player.BaseInput.Controls.Run.WasPerformedThisFrame() && _player.BaseInput.Controls.Movement.ReadValue<Vector2>().magnitude > 0),
                 new Transition(BehaviourStates.Walk, BehaviourStates.Jump, 
-                    () => _player.BaseInput.Controls.Jump.WasPerformedThisFrame()),
+                    () => _player.BaseInput.Controls.Jump.WasPerformedThisFrame() && _player.GroundingChecker.IsOnGround),
 
                 //RUN
                 
@@ -57,9 +61,9 @@ namespace Player.StateMachine.Initializer
                 //WallRun
 
                 new Transition(BehaviourStates.WallRun, BehaviourStates.Idle,
-                    () => !_player.WallChecker.IsOnWall),
+                    () => !_player.WallChecker.IsOnWall || _player.GroundingChecker.IsOnGround),
                 new Transition(BehaviourStates.WallRun, BehaviourStates.WallJump,
-                    () => _player.BaseInput.Controls.Jump.WasPerformedThisFrame()),
+                    () => _player.BaseInput.Controls.Jump.WasPerformedThisFrame() && _player.WallChecker.IsOnWall),
 
                 
                 //WallJump

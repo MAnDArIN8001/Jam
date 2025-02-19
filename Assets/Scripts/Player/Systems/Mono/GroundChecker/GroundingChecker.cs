@@ -5,7 +5,6 @@ namespace Player.Systems.Mono
 {
     public class GroundingChecker : MonoBehaviour, IGroundChecker
     {
-        public event Action OnGrounded;
 
         [SerializeField] private float _checkDistance;
 
@@ -18,8 +17,6 @@ namespace Player.Systems.Mono
             if (Physics.Raycast(_checkerPoint.position, -transform.up, _checkDistance))
             {
                 IsOnGround = true;
-                
-                OnGrounded?.Invoke();
             }
         }
 

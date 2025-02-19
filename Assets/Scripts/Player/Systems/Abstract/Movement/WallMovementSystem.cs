@@ -16,7 +16,6 @@ namespace Player.Systems
         public override void Move(Vector3 direction, float speed)
         {
             base.Move(direction, speed);
-            rigidbody.AddForce(-_wallChecker.WallNormal);
         }
 
     }
