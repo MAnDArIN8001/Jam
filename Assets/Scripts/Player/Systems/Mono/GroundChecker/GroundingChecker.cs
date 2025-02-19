@@ -25,7 +25,8 @@ namespace Player.Systems.Mono
 
         private void OnTriggerExit(Collider other)
         {
-            if (Physics.Raycast(_checkerPoint.position, -transform.up, _checkDistance))
+
+            if (!Physics.Raycast(_checkerPoint.position, -transform.up, _checkDistance))
             {
                 IsOnGround = false;
             }

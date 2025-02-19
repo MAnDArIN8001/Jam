@@ -1,25 +1,20 @@
-﻿using Player.Systems.JumpSystem;
+﻿using Player.StateMachine.States.Base;
+using Player.Systems.JumpSystem;
 using Player.View;
 
 namespace Player.StateMachine.States
 {
-    public class JumpState : State
+    public class JumpState : BaseJumpState
     {
-        private JumpSystem _jumpSystem;
-        
-        private PlayerView _playerView;
 
         public JumpState(Player player) : base(player)
-        {
-            _jumpSystem = player.JumpSystem;
-            _playerView = player.PlayerView;
-
+        {          
             StateType = BehaviourStates.Jump;
         }
 
         public override void Enter()
         {
-            _jumpSystem.Jump();
+            _jumpSystem.Jump(_jumpForce);
         }
 
         public override void Update() { }

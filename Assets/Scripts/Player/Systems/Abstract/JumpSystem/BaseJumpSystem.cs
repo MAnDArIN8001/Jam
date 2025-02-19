@@ -5,35 +5,17 @@ namespace Player.Systems.JumpSystem
 {
     public class BaseJumpSystem : JumpSystem
     {
-        private float _jumpForce;
-
-        private IGroundChecker _groundChecker;
-        
-        private readonly Rigidbody _rigidbody;
-        
-        public BaseJumpSystem(GameObject context, IGroundChecker groundChecker, float jumpForce) : base(context)
+           
+        public BaseJumpSystem(GameObject context) : base(context)
         {
-            _jumpForce = jumpForce;
-            _groundChecker = groundChecker;
-            
-            if (!context.TryGetComponent<Rigidbody>(out _rigidbody))
-            {
-                Debug.LogWarning($"Can't resolve required rigidbody component from {context}");
-            }
         }
         
-        public override void Jump()
+
+        public override void Jump(float jumpForce, Vector3 direction = default)
         {
-            if (!_groundChecker.IsOnGround) return;
+            if(direction == default) direction = _context.transform.up;
 
-            this.Jump(_context.transform.up);
-        }
-
-        protected override void Jump(Vector3 direction)
-        {
-            var newVelocity = (direction * _jumpForce) + _rigidbody.linearVelocity;
-
-            _rigidbody.linearVelocity = newVelocity;
+            base.Jump(jumpForce, direction);
         }
     }
 }

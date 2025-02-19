@@ -1,34 +1,24 @@
 ﻿
-using Player.Systems.Mono;
-using Player.Systems.Movement;
+using Player.StateMachine.States.Base;
+using UnityEngine;
 
 namespace Player.StateMachine.States
 {
-    public class WallRunState: State
+    public class WallRunState: BaseMoveState
     {
-        private MovementSystem _movementSystem;
-        private WallChecker _wallChecker;
+        private readonly BaseInput _baseInput;
 
         public WallRunState(Player player) : base(player)
         {
+            _movementSystem = player.WallMovementSystem;
+
             StateType = BehaviourStates.WallRun;
-            _movementSystem = player.MovementSystem;
-            _wallChecker = player.WallChecker;
         }
 
-        public override void Enter()
-        {
+        public override void Enter() { }
 
-        }
+        public override void Exit() { }
 
-        public override void Update()
-        {
-
-        }
-
-        public override void Exit()
-        {
-
-        }
+        protected override void ViewDataUpdate() { }
     }
 }

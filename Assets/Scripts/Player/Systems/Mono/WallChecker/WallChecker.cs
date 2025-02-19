@@ -8,7 +8,7 @@ namespace Player.Systems.Mono
         public bool IsOnWall => _isOnWall;
 
         public Vector3 WallNormal => _wallNormal;
-
+        public Player Player;
         private Vector3 _wallNormal;
         private bool _isOnWall;
 
@@ -22,10 +22,10 @@ namespace Player.Systems.Mono
         private void CheckForWalls()
         {
             // Проверяем наличие стены слева
-            CheckWall(Vector3.left);
+            CheckWall(-Player.transform.right);
 
             // Проверяем наличие стены справа
-            CheckWall(Vector3.right);
+            CheckWall(Player.transform.right);
         }
 
         private void CheckWall(Vector3 direction)
@@ -35,9 +35,13 @@ namespace Player.Systems.Mono
             {
                 _isOnWall = true;
                 _wallNormal = hit.normal;
+                Debug.DrawLine(transform.position, hit.point, Color.red);
                 return;
                 // Вызываем событие, если игрок коснулся стены
             }
+            Debug.DrawLine(transform.position, transform.position + direction.normalized * checkDistance, Color.green);
+
+
             _isOnWall = false;
         }
     }

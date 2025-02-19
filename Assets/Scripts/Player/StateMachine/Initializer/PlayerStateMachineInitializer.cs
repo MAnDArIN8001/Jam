@@ -25,7 +25,8 @@ namespace Player.StateMachine.Initializer
                 {BehaviourStates.Run, new RunState(_player)},
                 {BehaviourStates.Jump, new JumpState(_player)},
                 {BehaviourStates.Fall, new FallState(_player)},
-                {BehaviourStates.WallRun, new WallRunState(_player)}
+                {BehaviourStates.WallRun, new WallRunState(_player)},
+                {BehaviourStates.WallJump, new WallJumpState(_player)}
             };
 
             var transitions = new List<Transition>()
@@ -59,6 +60,12 @@ namespace Player.StateMachine.Initializer
                     () => _player.GroundingChecker.IsOnGround),
                 new Transition(BehaviourStates.WallRun, BehaviourStates.WallJump,
                     () => _player.BaseInput.Controls.Jump.WasPerformedThisFrame()),
+
+                
+                //WallJump
+
+                new Transition(BehaviourStates.WallJump, BehaviourStates.Idle,
+                    () => _player.GroundingChecker.IsOnGround),
 
                 //JUMP
 

@@ -11,6 +11,7 @@ using Player.Systems.Movement;
 using Setup.Player;
 using UnityEngine;
 using Zenject;
+using Player.Systems;
 
 namespace Player
 {
@@ -18,6 +19,8 @@ namespace Player
     {
         public JumpSystem JumpSystem { get; private set; }
         public MovementSystem MovementSystem { get; private set; }
+        public WallMovementSystem WallMovementSystem { get; private set; }
+
 
         [field: SerializeField, Space, Header("View")] public PlayerView PlayerView { get; private set; }
        
@@ -37,14 +40,15 @@ namespace Player
 
         public StateMachine.StateMachine StateMachine => _stateMachine;
 
+
         [Inject]
         private void Initialize(BaseInput baseInput)
         {
             _baseInput = baseInput;
 
             MovementSystem = new BaseMovementSystem(gameObject);
-            JumpSystem = new BaseJumpSystem(gameObject, GroundingChecker, PlayerSetup.JumpForce);
-
+            JumpSystem = new BaseJumpSystem(gameObject);
+            WallMovementSystem = new WallMovementSystem(gameObject, WallChecker);
 
             var playerFSMInitializer = new PlayerStateMachineInitializer(this);
             

@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Player.Systems
 {
-    public class BaseWallMovementSystem : BaseMovementSystem
+    public class WallMovementSystem : BaseMovementSystem
     {
         private readonly IWallChecker _wallChecker;
 
-        public BaseWallMovementSystem(GameObject context, IWallChecker wallChecker) : base(context)
+        public WallMovementSystem(GameObject context, IWallChecker wallChecker) : base(context)
         {
             _wallChecker = wallChecker;
         }
