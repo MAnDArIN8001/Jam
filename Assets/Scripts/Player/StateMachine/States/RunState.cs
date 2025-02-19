@@ -4,6 +4,7 @@
     {
         public RunState(Player player) : base(player)
         {
+            StateType = BehaviourStates.Walk;
         }
 
         public override void Enter()

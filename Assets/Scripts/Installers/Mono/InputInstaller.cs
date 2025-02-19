@@ -6,7 +6,11 @@ namespace Installers.Mono
     {
         public override void InstallBindings()
         {
-            Container.Bind<BaseInput>().FromNew().AsSingle().NonLazy();
+            var baseInput = new BaseInput();
+            
+            Container.Bind<BaseInput>().FromInstance(baseInput).AsSingle().NonLazy();
+            
+            baseInput.Enable();
         }
     }
 }
