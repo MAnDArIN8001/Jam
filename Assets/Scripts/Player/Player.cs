@@ -1,8 +1,4 @@
-﻿using System.Collections.Generic;
-using Player.StateMachine;
-using Player.StateMachine.Initializer;
-using Player.StateMachine.States;
-using Player.StateMachine.StateTransitions;
+﻿using Player.StateMachine.Initializer;
 using Player.View;
 using Player.View.Rigging;
 using Player.Systems.JumpSystem;
@@ -19,7 +15,7 @@ namespace Player
         public JumpSystem JumpSystem { get; private set; }
         public MovementSystem MovementSystem { get; private set; }
 
-        [field: SerializeField, Space, Header("View")] public PlayerView PlayerView { get; private set; }
+        [field: SerializeField, Header("View")] public PlayerView PlayerView { get; private set; }
         [field: SerializeField] public PlayerRiggingController PlayerRiggingController { get; private set; }
         
         [field: SerializeField, Space, Header("Configuration")] public PlayerSetup PlayerSetup { get; private set; }
