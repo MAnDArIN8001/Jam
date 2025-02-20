@@ -47,7 +47,8 @@ namespace Player.StateMachine.Initializer
                 new Transition(BehaviourStates.Walk, BehaviourStates.Idle, 
                     () => _player.BaseInput.Controls.Movement.ReadValue<Vector2>().magnitude == 0),
                 new Transition(BehaviourStates.Walk, BehaviourStates.Run, 
-                    () => _player.BaseInput.Controls.Run.WasPerformedThisFrame() && _player.BaseInput.Controls.Movement.ReadValue<Vector2>().magnitude > 0),
+                    () => _player.BaseInput.Controls.Run.IsPressed()
+                          && _player.BaseInput.Controls.Movement.ReadValue<Vector2>().magnitude > 0),
                 new Transition(BehaviourStates.Walk, BehaviourStates.Jump, 
                     () => _player.BaseInput.Controls.Jump.WasPerformedThisFrame() && _player.GroundingChecker.IsOnGround),
 

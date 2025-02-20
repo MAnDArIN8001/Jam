@@ -39,6 +39,5 @@ namespace Player.StateMachine.States.Base
         protected abstract void ViewDataUpdate();
         
         protected Vector2 ReadInputValues() => _baseInput.Controls.Movement.ReadValue<Vector2>();
-
     }
 }
