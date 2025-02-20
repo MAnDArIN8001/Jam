@@ -1,8 +1,6 @@
 ﻿
 using Player.StateMachine.States.Base;
-using Player.Systems.JumpSystem;
 using Player.Systems.Mono;
-using Player.View;
 
 namespace Player.StateMachine.States
 {
@@ -13,7 +11,7 @@ namespace Player.StateMachine.States
         public WallJumpState(Player player) : base(player)
         {
             _wallChecker = player.WallChecker;
-            StateType = BehaviourStates.Jump;
+            StateType = BehaviourStates.WallJump;
         }
 
         public override void Enter()

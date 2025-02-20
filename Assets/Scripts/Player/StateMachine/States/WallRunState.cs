@@ -11,6 +11,7 @@ namespace Player.StateMachine.States
         public WallRunState(Player player) : base(player)
         {
             _movementSystem = player.WallMovementSystem;
+            _movementSpeed = player.PlayerSetup.MovementSpeed;
 
             StateType = BehaviourStates.WallRun;
         }

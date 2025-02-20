@@ -182,8 +182,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1035796388}
+  m_Children: []
   m_Father: {fileID: 721472838}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &568765015
@@ -331,13 +330,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 698098641}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0174, y: 1.2489, z: -6.52}
+  m_LocalRotation: {x: -0, y: 0.6773439, z: -0, w: 0.7356665}
+  m_LocalPosition: {x: 4.05, y: 1.2489, z: -9.09}
   m_LocalScale: {x: 5.296, y: 4.7408066, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 85.273, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,6 +475,8 @@ GameObject:
   - component: {fileID: 721472840}
   - component: {fileID: 721472843}
   - component: {fileID: 721472842}
+  - component: {fileID: 721472847}
+  - component: {fileID: 721472848}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -492,7 +493,7 @@ Transform:
   m_GameObject: {fileID: 721472837}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.10484177, y: 0.446, z: -10.23972}
+  m_LocalPosition: {x: -0.10484177, y: 1.92, z: -10.23972}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -542,8 +543,8 @@ MonoBehaviour:
   <PlayerView>k__BackingField: {fileID: 721472843}
   <PlayerRiggingController>k__BackingField: {fileID: 721472842}
   <PlayerSetup>k__BackingField: {fileID: 11400000, guid: 8bb2dd56205e9e04dba380bd73f05b2d, type: 2}
-  <GroundingChecker>k__BackingField: {fileID: 1035796389}
-  <WallChecker>k__BackingField: {fileID: 1035796392}
+  <GroundingChecker>k__BackingField: {fileID: 721472848}
+  <WallChecker>k__BackingField: {fileID: 721472847}
 --- !u!136 &721472841
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -704,6 +705,35 @@ MonoBehaviour:
   - {fileID: 1483846073}
   - {fileID: 1483846069}
   - {fileID: 1483846070}
+--- !u!114 &721472847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721472837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd04d4fe04d9f0940903d4219fb7c34d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tolerance: 0.2
+  _isOnWall: 0
+--- !u!114 &721472848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721472837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cc632943ddbecd48b04a11a89931668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _checkDistance: 0.25
+  _checkerPoint: {fileID: 0}
+  _tolerance: 0.9
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,67 +904,6 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
---- !u!1 &1035796387
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1035796388}
-  - component: {fileID: 1035796389}
-  - component: {fileID: 1035796392}
-  m_Layer: 0
-  m_Name: GroundChecker
-  m_TagString: Untagged
-  m_Icon: {fileID: 4162164826716764455, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1035796388
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1035796387}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.837, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 373270091}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1035796389
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1035796387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc632943ddbecd48b04a11a89931668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _checkDistance: 0.25
-  _checkerPoint: {fileID: 1035796388}
---- !u!114 &1035796392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1035796387}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd04d4fe04d9f0940903d4219fb7c34d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _checkPoint: {fileID: 721472838}
-  _checkDistance: 1
 --- !u!1 &1045145706
 GameObject:
   m_ObjectHideFlags: 0

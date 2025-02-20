@@ -22,7 +22,9 @@ namespace Player.Systems
 
         public override void Move(Vector3 direction, float speed)
         {
-            var newVelocity = new Vector3(direction.x * speed, _rigidbody.linearVelocity.y, direction.z * speed);
+            Vector3 normalizedNormal = _wallChecker.WallNormal;
+            Vector3 projection = Vector3.ProjectOnPlane(direction, normalizedNormal);
+            var newVelocity = new Vector3(projection.x * speed , _rigidbody.linearVelocity.y * .9f, projection.z * speed);
 
             _rigidbody.linearVelocity = newVelocity;
         }
