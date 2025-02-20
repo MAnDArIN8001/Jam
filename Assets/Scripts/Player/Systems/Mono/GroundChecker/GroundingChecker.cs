@@ -4,9 +4,7 @@ namespace Player.Systems.Mono
 {
     public class GroundingChecker : MonoBehaviour, IGroundChecker
     {
-        [SerializeField] private float _checkDistance;
 
-        [Space, SerializeField] private Transform _checkerPoint;
 
         public bool IsOnGround => _isOnGround;
 
