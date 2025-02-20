@@ -1,5 +1,4 @@
-﻿using System;
-using Player.StateMachine.StateTransitions;
+﻿using NUnit.Framework.Constraints;
 using UnityEngine;
 
 namespace Player.Systems.Mono
@@ -9,40 +8,41 @@ namespace Player.Systems.Mono
         public bool IsOnWall => _isOnWall;
 
         public Vector3 WallNormal => _wallNormal;
-
-        [SerializeField] private Transform _checkPoint;
         
+        [SerializeField, Range(0,1)] private float _tolerance = 0.2f;
+
         private Vector3 _wallNormal;
-        
-        private bool _isOnWall;
+        [field: SerializeField] private bool _isOnWall;
 
-        [SerializeField] private float _checkDistance = 1.0f;
 
-        private void Update()
+        private void OnCollisionEnter(Collision collision)
         {
-            CheckForWalls();
+            CheckWallCollision(collision);
         }
 
-        private void CheckForWalls()
+        private void OnCollisionExit(Collision collision)
         {
-            _isOnWall = CheckWall(-_checkPoint.right);
-            _isOnWall |= CheckWall(_checkPoint.right);
+            CheckWallCollision(collision);
         }
 
-        private bool CheckWall(Vector3 direction)
+        private void OnCollisionStay(Collision collision)
         {
-            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, _checkDistance))
+            CheckWallCollision(collision);
+        }
+
+        private void CheckWallCollision(Collision collision)
+        {
+            foreach (var contact in collision.contacts)
             {
-                _wallNormal = hit.normal;
-                
-                Debug.DrawLine(transform.position, hit.point, Color.red);
-                
-                return true;
-            }
-            
-            Debug.DrawLine(transform.position, transform.position + direction.normalized * _checkDistance, Color.green);
+                if (Mathf.Abs(contact.normal.y) > _tolerance) continue;
 
-            return false;
+                _wallNormal = contact.normal;
+                _isOnWall = true;
+                return;
+            }
+
+            _wallNormal = Vector3.zero;
+            _isOnWall = false;
         }
     }
 }
