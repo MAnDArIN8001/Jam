@@ -184,6 +184,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1035796388}
+  - {fileID: 831498393}
   m_Father: {fileID: 721472838}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &568765015
@@ -435,6 +436,7 @@ MonoBehaviour:
   <PlayerRiggingController>k__BackingField: {fileID: 721472842}
   <PlayerSetup>k__BackingField: {fileID: 11400000, guid: 8bb2dd56205e9e04dba380bd73f05b2d, type: 2}
   <GroundingChecker>k__BackingField: {fileID: 1035796389}
+  <WallChecker>k__BackingField: {fileID: 831498394}
 --- !u!136 &721472841
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -595,6 +597,52 @@ MonoBehaviour:
   - {fileID: 1483846073}
   - {fileID: 1483846069}
   - {fileID: 1483846070}
+--- !u!1 &831498392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 831498393}
+  - component: {fileID: 831498394}
+  m_Layer: 0
+  m_Name: WallChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &831498393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831498392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 373270091}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &831498394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831498392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd04d4fe04d9f0940903d4219fb7c34d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _checkPoint: {fileID: 721472838}
+  _checkDistance: 0.49
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
