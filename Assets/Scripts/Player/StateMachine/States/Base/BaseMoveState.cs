@@ -20,8 +20,7 @@ namespace Player.StateMachine.States.Base
             _movementSystem = player.MovementSystem;
             _baseInput = player.BaseInput;
         }
-
-
+        
         public override void Update()
         {
             var input = ReadInputValues();

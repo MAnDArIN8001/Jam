@@ -73,15 +73,19 @@ namespace Player.StateMachine.Initializer
 
                 //JUMP
 
+                new Transition(BehaviourStates.Jump, BehaviourStates.Fall, 
+                    () => !_player.GroundingChecker.IsOnGround),
                 new Transition(BehaviourStates.Jump, BehaviourStates.Idle, 
-                    () => _player.GroundingChecker.IsOnGround),
-                new Transition(BehaviourStates.Jump, BehaviourStates.WallRun,
-                    () => !_player.GroundingChecker.IsOnGround && _player.WallChecker.IsOnWall),
-                
+                    () => _player.GroundingChecker.IsOnGround && _player.BaseInput.Controls.Movement.ReadValue<Vector2>().magnitude == 0),
+
                 //FALL
                 
+                new Transition(BehaviourStates.Fall, BehaviourStates.WallRun,
+                    () => !_player.GroundingChecker.IsOnGround && _player.WallChecker.IsOnWall),
                 new Transition(BehaviourStates.Fall, BehaviourStates.Idle,
                     () => _player.GroundingChecker.IsOnGround && _player.BaseInput.Controls.Movement.ReadValue<Vector2>().magnitude == 0),
+                new Transition(BehaviourStates.Fall, BehaviourStates.Walk,
+                    () => _player.GroundingChecker.IsOnGround && _player.BaseInput.Controls.Movement.ReadValue<Vector2>().magnitude > 0),
             };
 
             return new StateMachine(states, transitions);

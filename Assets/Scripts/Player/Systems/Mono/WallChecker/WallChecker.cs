@@ -1,4 +1,5 @@
 ﻿using System;
+using Player.StateMachine.StateTransitions;
 using UnityEngine;
 
 namespace Player.Systems.Mono
@@ -8,11 +9,14 @@ namespace Player.Systems.Mono
         public bool IsOnWall => _isOnWall;
 
         public Vector3 WallNormal => _wallNormal;
-        public Player Player;
+
+        [SerializeField] private Transform _checkPoint;
+        
         private Vector3 _wallNormal;
+        
         private bool _isOnWall;
 
-        [SerializeField] private float checkDistance = 1.0f; // Дистанция проверки
+        [SerializeField] private float _checkDistance = 1.0f;
 
         private void Update()
         {
@@ -21,25 +25,22 @@ namespace Player.Systems.Mono
 
         private void CheckForWalls()
         {
-            // Проверяем наличие стены слева
-            _isOnWall = CheckWall(-Player.transform.right);
-
-            // Проверяем наличие стены справа
-            _isOnWall |= CheckWall(Player.transform.right);
+            _isOnWall = CheckWall(-_checkPoint.right);
+            _isOnWall |= CheckWall(_checkPoint.right);
         }
 
         private bool CheckWall(Vector3 direction)
         {
-            // Выполняем Raycast
-            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, checkDistance))
+            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, _checkDistance))
             {
                 _wallNormal = hit.normal;
+                
                 Debug.DrawLine(transform.position, hit.point, Color.red);
+                
                 return true;
-                // Вызываем событие, если игрок коснулся стены
             }
-            Debug.DrawLine(transform.position, transform.position + direction.normalized * checkDistance, Color.green);
-
+            
+            Debug.DrawLine(transform.position, transform.position + direction.normalized * _checkDistance, Color.green);
 
             return false;
         }

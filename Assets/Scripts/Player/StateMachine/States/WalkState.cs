@@ -15,7 +15,10 @@ namespace Player.StateMachine.States
 
         public override void Enter() { }
 
-        public override void Exit() { }
+        public override void Exit()
+        {
+            _movementSystem.Stop();
+        }
 
         protected override void ViewDataUpdate(){}
     }

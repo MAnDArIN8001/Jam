@@ -14,6 +14,8 @@ namespace Player.Systems.Movement
         
         public abstract void Move(Vector3 direction, float speed);
 
+        public abstract void Stop();
+
         public virtual void Dispose() { }
     }
 }

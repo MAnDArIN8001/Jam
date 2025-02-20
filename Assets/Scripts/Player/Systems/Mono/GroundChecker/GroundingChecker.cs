@@ -1,32 +1,15 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Player.Systems.Mono
 {
     public class GroundingChecker : MonoBehaviour, IGroundChecker
     {
-
         [SerializeField] private float _checkDistance;
 
         [Space, SerializeField] private Transform _checkerPoint;
 
-        public bool IsOnGround { get; private set; }
+        public bool IsOnGround => CheckForGround();
 
-        private void OnTriggerEnter(Collider other)
-        {
-            if (Physics.Raycast(_checkerPoint.position, -transform.up, _checkDistance))
-            {
-                IsOnGround = true;
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-
-            if (!Physics.Raycast(_checkerPoint.position, -transform.up, _checkDistance))
-            {
-                IsOnGround = false;
-            }
-        }
+        private bool CheckForGround() => Physics.Raycast(_checkerPoint.position, -transform.up, _checkDistance);
     }
 }
