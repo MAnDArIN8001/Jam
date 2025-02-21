@@ -33,23 +33,23 @@ public class PortalTraveller : MonoBehaviour {
         graphicsClone.SetActive (false);
         // Disable slicing
         for (int i = 0; i < originalMaterials.Length; i++) {
-            originalMaterials[i].SetVector ("sliceNormal", Vector3.zero);
+            originalMaterials[i].SetVector("_sliceNormal", Vector3.zero);
         }
     }
 
     public void SetSliceOffsetDst (float dst, bool clone) {
         for (int i = 0; i < originalMaterials.Length; i++) {
             if (clone) {
-                cloneMaterials[i].SetFloat ("sliceOffsetDst", dst);
+                cloneMaterials[i].SetFloat ("_sliceOffsetDst", dst);
             } else {
-                originalMaterials[i].SetFloat ("sliceOffsetDst", dst);
+                originalMaterials[i].SetFloat ("_sliceOffsetDst", dst);
             }
 
         }
     }
 
     Material[] GetMaterials (GameObject g) {
-        var renderers = g.GetComponentsInChildren<MeshRenderer> ();
+        var renderers = g.GetComponentsInChildren<SkinnedMeshRenderer> ();
         var matList = new List<Material> ();
         foreach (var renderer in renderers) {
             foreach (var mat in renderer.materials) {

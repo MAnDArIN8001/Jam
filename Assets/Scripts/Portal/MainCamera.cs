@@ -7,7 +7,6 @@ public class MainCamera : MonoBehaviour {
 
     void Awake () {
         portals = Object.FindObjectsByType<Portal>(FindObjectsSortMode.None);
-        Debug.Log(portals.Length);
     }
 
     private void OnEnable()

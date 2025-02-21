@@ -4,13 +4,10 @@ namespace Player.Systems.Mono
 {
     public class GroundingChecker : MonoBehaviour, IGroundChecker
     {
-
+        [SerializeField, Range(0, 1)] private float _tolerance = 0.9f;
 
         public bool IsOnGround => _isOnGround;
 
-       // private bool CheckForGround() => Physics.Raycast(_checkerPoint.position, -transform.up, _checkDistance);
-
-        [SerializeField, Range(0, 1)] private float _tolerance = 0.9f;
         private bool _isOnGround;
 
         private void OnCollisionEnter(Collision collision)

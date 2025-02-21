@@ -189,7 +189,7 @@ public class Portal : MonoBehaviour {
 
         Transform screenT = screen.transform;
         bool camFacingSameDirAsPortal = Vector3.Dot (transform.forward, transform.position - viewPoint) > 0;
-        screenT.localScale = new Vector3 (screenT.localScale.x, screenT.localScale.y, screenThickness);
+       // screenT.localScale = new Vector3 (screenT.localScale.x, screenT.localScale.y, screenThickness);
         screenT.localPosition = Vector3.forward * screenThickness * ((camFacingSameDirAsPortal) ? 0.5f : -0.5f);
         return screenThickness;
     }
@@ -201,8 +201,8 @@ public class Portal : MonoBehaviour {
         Vector3 cloneSliceNormal = linkedPortal.transform.forward * side;
 
         // Calculate slice centre
-        Vector3 slicePos = transform.position;
-        Vector3 cloneSlicePos = linkedPortal.transform.position;
+        Vector3 slicePos = screen.transform.position;
+        Vector3 cloneSlicePos = linkedPortal.screen.transform.position;
 
         // Adjust slice offset so that when player standing on other side of portal to the object, the slice doesn't clip through
         float sliceOffsetDst = 0;
@@ -210,23 +210,25 @@ public class Portal : MonoBehaviour {
         float screenThickness = screen.transform.localScale.z;
 
         bool playerSameSideAsTraveller = SameSideOfPortal (playerCam.transform.position, traveller.transform.position);
-        if (!playerSameSideAsTraveller) {
+        if (!playerSameSideAsTraveller)
+        {
             sliceOffsetDst = -screenThickness;
         }
-        bool playerSameSideAsCloneAppearing = side != linkedPortal.SideOfPortal (playerCam.transform.position);
-        if (!playerSameSideAsCloneAppearing) {
+        bool playerSameSideAsCloneAppearing = side != linkedPortal.SideOfPortal(playerCam.transform.position);
+        if (!playerSameSideAsCloneAppearing)
+        {
             cloneSliceOffsetDst = -screenThickness;
         }
 
         // Apply parameters
         for (int i = 0; i < traveller.originalMaterials.Length; i++) {
-            traveller.originalMaterials[i].SetVector ("sliceCentre", slicePos);
-            traveller.originalMaterials[i].SetVector ("sliceNormal", sliceNormal);
-            traveller.originalMaterials[i].SetFloat ("sliceOffsetDst", sliceOffsetDst);
+            traveller.originalMaterials[i].SetVector ("_sliceCenter", slicePos);
+            traveller.originalMaterials[i].SetVector ("_sliceNormal", sliceNormal);
+            traveller.originalMaterials[i].SetFloat ("_sliceOffsetDst", sliceOffsetDst);
 
-            traveller.cloneMaterials[i].SetVector ("sliceCentre", cloneSlicePos);
-            traveller.cloneMaterials[i].SetVector ("sliceNormal", cloneSliceNormal);
-            traveller.cloneMaterials[i].SetFloat ("sliceOffsetDst", cloneSliceOffsetDst);
+            traveller.cloneMaterials[i].SetVector ("_sliceCenter", cloneSlicePos);
+            traveller.cloneMaterials[i].SetVector ("_sliceNormal", cloneSliceNormal);
+            traveller.cloneMaterials[i].SetFloat ("_sliceOffsetDst", cloneSliceOffsetDst);
 
         }
 
